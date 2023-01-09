@@ -1,0 +1,49 @@
+{% extends "blogApp/base.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+<h3>LABIOS</h3>
+
+{% endblock %}
+
+{% block subtitulo %}
+<!-- <h2 class="subheading">Problems look mighty small from 150 miles up</h2> -->
+
+{% endblock %}
+
+
+{% block contenido%}
+
+        <!-- Post Content-->
+        <H2>POSTESO SOBRE:LABIOS</H1>
+        
+        <div>
+    
+        <header class="masthead" style="background-image: url('data:image/jpeg;base64,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')">
+        
+
+        </div>
+            
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <H2>Bótox® o ácido hialurónico</H2>
+                        <P>Lucir más joven no es sólo una preferencia femenina, ahora los hombres también quieren renovar su aspecto. Sin embargo, antes de optar por un tratamiento de Bótox® o ácido hialurónico en labios hay que informarse bien.</P>
+                        <p>Ambas son sustancias usadas en la medicina estética y ocasionan mucha confusión en los potenciales usuarios.</p>
+                        <p>¿Te has preguntado cuándo es recomendable usar el Bótox® y cuándo el ácido hialurónico? Si estás considerando atenuar arrugas o dar volumen a ciertas zonas del rostro, debes conocer las características de cada uno.</p>
+                        <p> Estos procedimientos no se limitan sólo a la belleza. Son sinónimo de salud y bienestar en la vida de quienes optan por mejorar su apariencia con ayuda de la cosmética actual. Así que en nuestro texto conocerás las diferencias entre ambas sustancias.</p>
+                        <P> 
+
+                            Esta técnica es super natural y hoy en día es buscada por muchísimas personas que sufren de enfermedades como alopecia, que tienen vello por partes en sus cejas  o que simplemente quieren definirlas dándole un toque de perfección sin perder la naturalidad.</P>
+                         <p class="post-meta">
+                             Creado por Davor Suker
+                             el 3 de Enero de 2023
+                         </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+{% endblock%}

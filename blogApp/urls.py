@@ -8,6 +8,7 @@ urlpatterns = [
     path("posteos/", posteos, name="posteos"),
     path("microblading/", microblading, name="microblading"),
     path("perfilado/", perfilado, name="perfilado"),
+    path("labios/", labios, name="labios"),
     
 
 ]

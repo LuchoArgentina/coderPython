@@ -21,3 +21,6 @@ def microblading(request):
 
 def perfilado(request):
     return render(request, "blogApp/perfilado.html")
+
+def labios(request):
+    return render(request, "blogApp/labios.html")
