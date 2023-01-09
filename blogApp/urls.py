@@ -6,6 +6,8 @@ urlpatterns = [
     path("acercaDeMi/", acercaDeMi, name="acercaDeMi"),
     path("contacto/", contacto, name="contacto"),
     path("posteos/", posteos, name="posteos"),
+    path("microblading/", microblading, name="microblading"),
+    path("perfilado/", perfilado, name="perfilado"),
     
 
 ]

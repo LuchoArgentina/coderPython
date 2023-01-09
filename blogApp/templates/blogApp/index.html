@@ -4,37 +4,51 @@
 
 
 {% block titulo %}
-   <h1>Clean Blog</h1>
+<!-- <h1>TU BLOG </h1> -->
 {% endblock %}
 
 {% block subtitulo %}
-    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+<!-- <span class="subheading">sobre belleza facial</span> -->
 {% endblock %}
 
 
 {% block contenido%}
-<div class="post-preview">
-    <a href="post.html">
-        <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-        <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-    </a>
-    <p class="post-meta">
-        Posted by
-        <a href="#!">Start Bootstrap</a>
-        on September 24, 2022
-    </p>
-</div>
+<h1> TU BLOG  </h1> <span class="subheading">sobre belleza facial</span>
+
 <!-- Divider-->
 <hr class="my-4" />
-<!-- Post preview-->
+
+<!-- Post preview MICROBLADING-->
 <div class="post-preview">
-    <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
+    
+        <h2 class="post-title">Descubre el microblading</h2>
+        <p> El microblading vino a revolucionar el concepto en cejas, todo lo que tenes que saber es este sitio.</p>
+    
     <p class="post-meta">
-        Posted by
-        <a href="#!">Start Bootstrap</a>
-        on September 18, 2022
+        Creado por
+        Luis Boss
+        el 9 de Enero de 2023
     </p>
+    <a href="{% url 'microblading' %}">Leer más...</a>
 </div>
+
+<!-- Divider-->
+<hr class="my-4" />
+
+<!-- Post preview PERFILADO-->
+<div class="post-preview">
+    
+    <h2 class="post-title"> Cual es el mejor perfilado de Cejas?</h2>
+    <p> El perfiladod e cejas, lleva tiempo entre nosotros. Le vamos a presentar las mejores técnicas según tu fisonomia facial.</p>
+
+<p class="post-meta">
+    Creado por
+    Marisa Perciavale
+    el 31 de Diciembre de 2022
+</p>
+<a href="{% url 'perfilado' %}">Leer más...</a>
+</div>
+
 <!-- Divider-->
 <hr class="my-4" />
 <!-- Post preview-->

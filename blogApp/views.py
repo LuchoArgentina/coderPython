@@ -15,3 +15,9 @@ def contacto(request):
 
 def posteos(request):
     return render(request, "blogApp/posteos.html")
+
+def microblading(request):
+    return render(request, "blogApp/microblading.html")
+
+def perfilado(request):
+    return render(request, "blogApp/perfilado.html")
