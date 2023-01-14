@@ -4,6 +4,7 @@
 
 
 {% block titulo %}
+<h2> {{mensaje}} </h2>
 <!-- <h1>TU BLOG </h1> -->
 {% endblock %}
 
@@ -26,9 +27,10 @@
         <p> El microblading vino a revolucionar el concepto en cejas, todo lo que tenes que saber esta este sitio.</p>
     
     <p class="post-meta">
-        Creado por
-        Luis Boss
-        el 1 de Enero de 2023
+        Creado por:
+        {{posteoMicroblading.nombreAutor}}
+        {{posteoMicroblading.apellidoAutor}}, el
+        {{posteoMicroblading.fechaCreacion}}
     </p>
     <div class="d-flex justify-content-end mb-4"><a class="btn btn-link" href="{% url 'microblading' %}">Leer más →</a></div>
 </div>
@@ -43,9 +45,10 @@
     <p> El perfilado de cejas, lleva tiempo entre nosotros. Le vamos a presentar las mejores técnicas según tu fisonomia facial.</p>
 
 <p class="post-meta">
-    Creado por
-    Marisa Perciavale
-    el 2 de Enero de 2023
+    Creado por:
+    {{posteoPerfilado.nombreAutor}}
+    {{posteoPerfilado.apellidoAutor}}, el
+    {{posteoPerfilado.fechaCreacion}}  
 </p>
 
 <div class="d-flex justify-content-end mb-4"><a class="btn btn-link" href="{% url 'perfilado' %}">Leer más →</a></div>
@@ -61,9 +64,10 @@
     <p> Hoy en día son de los tratamientos de medicina estética favoritos de millones de personas que buscan lucir jóvenes. Entonces, debes tener claro que el Bótox® y el ácido hialurónico, no es lo mismo.</p>
 
 <p class="post-meta">
-    Creado por
-    Davor Suker
-    el 3 de Enero de 2023
+    Creado por:
+    {{posteoLabios.nombreAutor}}
+    {{posteoLabios.apellidoAutor}}, el
+    {{posteoLabios.fechaCreacion}}
 </p>
 
 <div class="d-flex justify-content-end mb-4"><a class="btn btn-link" href="{% url 'labios' %}">Leer más →</a></div>
@@ -73,6 +77,7 @@
 <hr class="my-4" />
 
 
+<a class="btn btn-outline-primary" href="{% url 'listaPosteos' %}">Listado de posteos</a>
 <!-- Pager-->
 
 </div>

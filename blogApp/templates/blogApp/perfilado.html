@@ -4,7 +4,7 @@
 
 
 {% block titulo %}
-<h3>PERFILADO DE CEJAS</h3>
+<h3>{{posteoPerfilado.titulo}}</h3>
 
 {% endblock %}
 
@@ -17,7 +17,7 @@
 {% block contenido%}
 
         <!-- Post Content-->
-        <H2>POSTESO SOBRE: Perfiado de Cejas</H2>
+        <H2>{{posteoPerfilado.subtitulo}}</H2>
         
         <div>
     
@@ -29,13 +29,15 @@
         <article class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <H2>¿Qué es el perfilado?</H2>
-                        <P>Consiste en el diseño y modelado de las cejas de acuerdo con la estructura de tu rostro, tus ojos y nariz. El objetivo del perfilado no es seguir el patrón de ceja que está de moda, sino perfeccionar su forma natural (sean delgadas o gruesas, largas o cortas).</P>
+                    <div class="col-md-20 col-lg-18 col-xl-17">
+                        
+                        <P>{{posteoPerfilado.cuerpo}}</P>
 
                         <p class="post-meta">
-                        Creado por: 
-                        Marisa Perciavale el 2 de Enero de 2023     
+                        Creado por:
+                        {{posteoPerfilado.nombreAutor}}
+                        {{posteoPerfilado.apellidoAutor}}, el
+                        {{posteoPerfilado.fechaCreacion}}     
                          </p>
                     </div>
                 </div>

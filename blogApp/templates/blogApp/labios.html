@@ -4,7 +4,7 @@
 
 
 {% block titulo %}
-<h3>LABIOS</h3>
+<h3>{{posteoLabios.titulo}}</h3>
 
 {% endblock %}
 
@@ -17,7 +17,7 @@
 {% block contenido%}
 
         <!-- Post Content-->
-        <H2>POSTESO SOBRE:LABIOS</H1>
+        <H2>{{posteoLabios.subtitulo}}</H2>
         
         <div>
     
@@ -29,18 +29,21 @@
         <article class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <H2>Bótox® o ácido hialurónico</H2>
+                    <div class="col-md-20 col-lg-18 col-xl-17">
+                        
                         <P>Lucir más joven no es sólo una preferencia femenina, ahora los hombres también quieren renovar su aspecto. Sin embargo, antes de optar por un tratamiento de Bótox® o ácido hialurónico en labios hay que informarse bien.</P>
                         <p>Ambas son sustancias usadas en la medicina estética y ocasionan mucha confusión en los potenciales usuarios.</p>
-                        <p>¿Te has preguntado cuándo es recomendable usar el Bótox® y cuándo el ácido hialurónico? Si estás considerando atenuar arrugas o dar volumen a ciertas zonas del rostro, debes conocer las características de cada uno.</p>
+                        <p>¿Te has preguntado cuándo es recomendable usar el Bótox® y cuándo el ácido hialurónico?</p>
+                        <p>Si estás considerando atenuar arrugas o dar volumen a ciertas zonas del rostro, debes conocer las características de cada uno.</p>
                         <p> Estos procedimientos no se limitan sólo a la belleza. Son sinónimo de salud y bienestar en la vida de quienes optan por mejorar su apariencia con ayuda de la cosmética actual. Así que en nuestro texto conocerás las diferencias entre ambas sustancias.</p>
                         <P> 
 
                             Esta técnica es super natural y hoy en día es buscada por muchísimas personas que sufren de enfermedades como alopecia, que tienen vello por partes en sus cejas  o que simplemente quieren definirlas dándole un toque de perfección sin perder la naturalidad.</P>
                          <p class="post-meta">
-                             Creado por Davor Suker
-                             el 3 de Enero de 2023
+                             Creado por:
+                             {{posteoLabios.nombreAutor}}
+                             {{posteoLabios.apellidoAutor}}, el
+                             {{posteoLabios.fechaCreacion}}
                          </p>
                     </div>
                 </div>

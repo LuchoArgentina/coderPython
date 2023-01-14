@@ -1,0 +1,40 @@
+{% extends "blogApp/base.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+
+
+{% endblock %}
+
+{% block subtitulo %}
+
+
+{% endblock %}
+
+
+{% block contenido%}
+
+<h1 style="color:#FF0000"> {{mensaje}} </h1>
+
+<!-- Divider-->
+<hr class="my-4" />
+
+<h1>REGISTRO DE USUARIOS</h1>
+   
+<form action="{% url 'registerUser' %}" method="POST"> {% csrf_token %}
+
+
+    <table>
+
+        {{ form.as_table }}
+
+    </table>
+
+    <input type="submit" value="CREAR USUARIO">
+
+</form>
+
+
+{% endblock%}
