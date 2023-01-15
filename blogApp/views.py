@@ -50,15 +50,7 @@ def registerUser(request):
     if request.method=="POST":
         form= RegistroUsuarioForm(request.POST)
         if form.is_valid():
-            # username=form.cleaned_data.get("username")
-            form=form.cleaned_data
-            username=form["username"]
-            nombre=form["nombre"]
-            apellido=form["apellido"]
-            email=form["email"]
-            password1=form["password1"]
-            password2=form["password2"]
-            form= User(username=username, first_name=nombre, last_name=apellido, email=email, password=password2)
+            username=form.cleaned_data.get("username")
             form.save()
             return render(request, "blogApp/index.html",{"mensaje":f"Felicitaciones! Usuario {username} creado correctamente"})
         else:
