@@ -15,5 +15,6 @@ urlpatterns = [
     path("login/", login_request, name="login"), 
     path("logout/", LogoutView.as_view(),name="logout"),
     path("editarPerfil/",editarPerfil,name="editarPerfil"),
+    path("leerPerfil/",leerPerfil,name="leerPerfil"),
 
 ]

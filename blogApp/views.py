@@ -100,3 +100,19 @@ def editarPerfil(request):
     else:
         form= ModificacionUsuarioForm(instance=usuario)
         return render(request, "blogApp/editarPerfil.html",{"form":form})
+
+@login_required
+def leerPerfil(request):
+    usuario=request.user
+
+    if request.method=="POST":
+        form=ModificacionUsuarioForm(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+
+            return render(request, "blogApp/index.html",{"mensaje":f"Usuario {usuario.username} editado correctamente"})
+        else:
+            return render(request, "blogApp/leerPerfil.html", {"form":form, "mensaje": "No se pudo editar el perfil"})
+    else:
+        form= ModificacionUsuarioForm(instance=usuario)
+        return render(request, "blogApp/leerPerfil.html",{"form":form})
