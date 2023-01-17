@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Posteos
+from .models import Posteos, Perfil, Avatar
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 
-from blogApp.forms import RegistroUsuarioForm, ModificacionUsuarioForm
+from blogApp.forms import RegistroUsuarioForm, ModificacionPerfilForm, CrearPerfilForm
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -80,39 +80,70 @@ def login_request(request):
         form=AuthenticationForm()
         return render(request, "blogApp/login.html", {"form":form})
 
+
+@login_required
+def leerPerfil(request):
+
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista)!=0:
+        avatar=lista[0].imagen.url
+    else:
+        avatar="/media/avatars/avatarVacio.png"
+
+    try:
+        user_id=request.user.pk
+        perfil = Perfil.objects.get(user_id=user_id)
+        data = {"ocupacion": perfil.ocupacion, "intereses": perfil.intereses}
+        if data==None:
+            return render(request, "blogApp/crearPerfil.html")
+        else:
+            return render(request, "blogApp/leerPerfil.html", {"perfil":data, "avatar":avatar})
+    except Perfil.DoesNotExist:
+        form= CrearPerfilForm()
+        return render(request, "blogApp/crearPerfil.html", {"form":form, "avatar": avatar})
+        
+
+
 @login_required
 def editarPerfil(request):
     usuario=request.user
+    user_id=request.user.pk
+    perfil = Perfil.objects.get(user_id=user_id)
+    data = {"ocupacion": perfil.ocupacion, "intereses": perfil.intereses}
+    form= ModificacionPerfilForm(initial={"ocupacion":perfil.ocupacion,"intereses":perfil.intereses})
+    
 
     if request.method=="POST":
-        form=ModificacionUsuarioForm(request.POST)
+        form=ModificacionPerfilForm(request.POST)
         if form.is_valid():
             info=form.cleaned_data
-            usuario.nombre=info["nombre"]
-            usuario.apellido=info["apellido"]
-            usuario.email=info["email"]
-            usuario.password1=info["password1"]            
-            usuario.password2=info["password2"]
-            usuario.save()
+            perfil.ocupacion=info["ocupacion"]
+            perfil.intereses=info["intereses"]
+            perfil.save()
             return render(request, "blogApp/index.html",{"mensaje":f"Usuario {usuario.username} editado correctamente"})
         else:
             return render(request, "blogApp/editarPerfil.html", {"form":form, "mensaje": "No se pudo editar el perfil"})
     else:
-        form= ModificacionUsuarioForm(instance=usuario)
+        form= ModificacionPerfilForm(initial={"ocupacion":perfil.ocupacion,"intereses":perfil.intereses})
         return render(request, "blogApp/editarPerfil.html",{"form":form})
 
-@login_required
-def leerPerfil(request):
-    usuario=request.user
 
+@login_required
+def crearPerfil(request):
+    usuario=request.user
+    user_id=request.user.pk
     if request.method=="POST":
-        form=ModificacionUsuarioForm(request.POST)
+        form=CrearPerfilForm(request.POST)
         if form.is_valid():
             info=form.cleaned_data
-
+            user_id_forening=user_id
+            ocupacion = info["ocupacion"]
+            intereses = info["intereses"]
+            perfil = Perfil(user_id=user_id_forening,ocupacion=ocupacion,intereses=intereses)
+            perfil.save()
             return render(request, "blogApp/index.html",{"mensaje":f"Usuario {usuario.username} editado correctamente"})
         else:
-            return render(request, "blogApp/leerPerfil.html", {"form":form, "mensaje": "No se pudo editar el perfil"})
+            return render(request, "blogApp/crearPerfil.html", {"form":form, "mensaje": "No se pudo editar el perfil"})
     else:
-        form= ModificacionUsuarioForm(instance=usuario)
-        return render(request, "blogApp/leerPerfil.html",{"form":form})
+        form= CrearPerfilForm()
+        return render(request, "blogApp/crearPerfil.html",{"form":form})

@@ -11,22 +11,17 @@
 {% block subtitulo %}
 
 
-        
-
 {% endblock %}
 
 
 {% block contenido%}
-
 
 <h1 style="color:#FF0000"> {{mensaje}} </h1>
 
 <!-- Divider-->
 <hr class="my-4" />
 
-<h1>TUS DATOS</h1>
-
-<p>Usuario: {{user.username}}</p>
+<h1>Perfil: {{user.username}}</h1>
 
 <img src="{{ avatar }}"  width="100" height="100" alt="">
 
@@ -40,14 +35,23 @@
 
 <!-- Divider-->
 <hr class="my-4" />
-    
 
 
-<form action="{% url 'editarPerfil' %}" method="POST"> {% csrf_token %}
-    
-    
-    <a button type="button" class="btn btn-light" href="{% url 'editarPerfil' %}">Actualizar perfil</button></a>
+<h2> Actualizar perfil</h2> 
+
+<form action="{% url 'crearPerfil' %}" method="POST"> {% csrf_token %}
+
+
+    <table>
+
+        {{ form.as_table }}
+
+    </table>
+
+
+    <input type="submit" value="Actualizar perfil">
 
 </form>
+
 
 {% endblock%}

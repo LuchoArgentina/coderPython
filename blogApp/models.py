@@ -16,11 +16,16 @@ class Posteos(models.Model):
         return f"{self.titulo} | {self.subtitulo} | {self.nombreAutor} , {self.apellidoAutor} " 
 
 class Perfil(models.Model):
-    username=models.ForeignKey(User, on_delete=models.CASCADE )
-    nombre=models.CharField(max_length=30)
-    apellido=models.CharField(max_length=500)
-    ocupacion=models.CharField(max_length=500)
+    user=models.ForeignKey(User, on_delete=models.CASCADE )
+    ocupacion=models.CharField(max_length=50)
+    intereses=models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return f"{self.nombre} | {self.apellido} | {self.ocupacion} "               
+        return f"{self.user} | {self.ocupacion} "               
 
+class Avatar(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE )
+    imagen=models.ImageField(upload_to="avatars", null=True, blank=True)
+
+    def __str__(self):
+       return f"{self.user} | {self.imagen} "  
