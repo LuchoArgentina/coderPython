@@ -1,0 +1,57 @@
+{% extends "blogApp/base.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+
+
+{% endblock %}
+
+{% block subtitulo %}
+
+
+{% endblock %}
+
+
+{% block contenido%}
+
+<h1 style="color:#FF0000"> {{mensaje}} </h1>
+
+<!-- Divider-->
+<hr class="my-4" />
+
+<h1>Perfil: {{user.username}}</h1>
+
+<!-- <img src="{{ avatar }}"  width="100" height="100" alt="">
+
+<p>Nombre y Apellido: {{user.first_name}}  {{user.last_name}}</p>
+
+<p>Email: {{user.email}}</p>
+
+<p>Ocupacion: {{perfil.ocupacion}}</p>
+
+<p>Tema de interes: {{perfil.intereses}}</p> -->
+
+<!-- Divider-->
+<hr class="my-4" />
+
+
+<h2> CREAR POSTEO</h2> 
+
+<form action="{% url 'crearPosteo' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+
+    <table>
+
+        {{ form.as_table }}
+
+    </table>
+
+
+    <input type="submit" value="Crear posteo">
+
+</form>
+
+
+{% endblock%}

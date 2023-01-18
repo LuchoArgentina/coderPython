@@ -17,6 +17,8 @@ urlpatterns = [
     path("leerPerfil/",leerPerfil,name="leerPerfil"),
     path("editarPerfil/",editarPerfil,name="editarPerfil"),
     path("crearPerfil/",crearPerfil,name="crearPerfil"),
+    path("agregarAvatar/",agregarAvatar,name="agregarAvatar"),
+    path("crearPosteo/",crearPosteo,name="crearPosteo"),
     
 
 ]

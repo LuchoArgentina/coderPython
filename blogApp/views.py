@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 
-from blogApp.forms import RegistroUsuarioForm, ModificacionPerfilForm, CrearPerfilForm
+from blogApp.forms import RegistroUsuarioForm, ModificacionPerfilForm, CrearPerfilForm, crearPosteoForm, avatarForm
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -147,3 +147,49 @@ def crearPerfil(request):
     else:
         form= CrearPerfilForm()
         return render(request, "blogApp/crearPerfil.html",{"form":form})
+
+
+@login_required
+def crearPosteo(request):
+    if request.method=="POST":
+        form= crearPosteoForm(request.POST, request.FILES)
+        if form.is_valid():
+            info=form.cleaned_data
+            titulo=info["titulo"]
+            subtitulo=info["subtitulo"]
+            cuerpo=info["cuerpo"]
+            nombreAutor=info["nombreAutor"]
+            apellidoAutor=info["apellidoAutor"]
+            fechaCreacion=info["fechaCreacion"]
+            imagen=info["imagen"]
+            posteo= Posteos(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,nombreAutor=nombreAutor,apellidoAutor=apellidoAutor,fechaCreacion=fechaCreacion, imagen=imagen)
+            posteo.save()
+            return render(request, "blogApp/index.html", {"mensaje":"Posteo creado exitosamente"})
+        else:
+                return render(request, "blogApp/crearPosteo.html", {"form":form, "mensaje": "No se pudo crear el posteo"})
+    else:
+        form= crearPosteoForm()
+        return render(request, "blogApp/crearPosteo.html", {"form":form})
+
+@login_required
+def agregarAvatar(request):
+    if request.method=="POST":
+        
+        miFormulario=avatarForm(request.POST, request.FILES)
+        
+        if miFormulario.is_valid():
+            
+            u = User.objects.get(username=request.user)
+
+            avatar= Avatar(user= u, imagen=miFormulario.cleaned_data["imagen"])
+
+            avatarViejo=Avatar.objects.filter(user=request.user)
+            if len(avatarViejo)>0:
+                 avatarViejo[0].delete()
+            avatar.save()
+            return render(request, "blogApp/index.html", {"mensaje":"Avatar modificado correctamente"})
+        else:
+            return render(request, "blogApp/leerPerfil.html", {"mensaje":"No es posible modificar el avatar"})
+    else:
+        miFormulario=avatarForm()
+        return render(request, "blogApp/agregarAvatar.html", {"form":miFormulario})

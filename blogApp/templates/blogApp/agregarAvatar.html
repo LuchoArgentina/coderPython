@@ -1,0 +1,49 @@
+{% extends "blogApp/base.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+
+
+{% endblock %}
+
+{% block subtitulo %}
+
+
+        
+
+{% endblock %}
+
+
+{% block contenido%}
+
+
+<h1 style="color:#FF0000"> {{mensaje}} </h1>
+
+<!-- Divider-->
+<hr class="my-4" />
+
+<h1>TUS DATOS</h1>
+
+<p>Usuario: {{user.username}}</p>
+
+
+
+
+
+<form action="{% url 'agregarAvatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+    <table>
+            
+        {{ form.as_table}}
+
+    </table>
+
+    <input type="submit" value="Agregar avatar">
+
+</form>
+
+
+
+{% endblock%}

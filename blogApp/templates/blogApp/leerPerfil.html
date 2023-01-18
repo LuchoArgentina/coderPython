@@ -30,6 +30,8 @@
 
 <img src="{{ avatar }}"  width="100" height="100" alt="">
 
+<a button type="button" class="btn btn-light" href="{% url 'agregarAvatar' %}">Editar avatar</button></a>
+
 <p>Nombre y Apellido: {{user.first_name}}  {{user.last_name}}</p>
 
 <p>Email: {{user.email}}</p>
