@@ -4,9 +4,7 @@ from .models import Posteos, Perfil, Avatar
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-
 from blogApp.forms import RegistroUsuarioForm, ModificacionPerfilForm, CrearPerfilForm, crearPosteoForm, avatarForm
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -33,17 +31,24 @@ def listaPosteos(request):
     return render(request, "blogApp/listaPosteos.html", {"posteos":posteos})
 
 def microblading(request):
-    posteoMicroblading = Posteos.objects.get(id=1)
-    return render(request, "blogApp/microblading.html", {"posteoMicroblading":posteoMicroblading})
+    posteo = Posteos.objects.get(id=1)
+    dicc_posteo={"titulo":posteo.titulo,"subtitulo":posteo.subtitulo,"cuerpo":posteo.cuerpo,"nombreAutor":posteo.nombreAutor,"apellidoAutor":posteo.apellidoAutor,"fechaCreacion": posteo.fechaCreacion, "imagen":posteo.imagen}
+
+    
+    return render(request, "blogApp/microblading.html", {"posteoMicroblading":dicc_posteo})
 
 def perfilado(request):
-    posteoPerfilado = Posteos.objects.get(id=2)
-    return render(request, "blogApp/perfilado.html", {"posteoPerfilado": posteoPerfilado})
+    posteo = Posteos.objects.get(id=2)
+    dicc_posteo={"titulo":posteo.titulo,"subtitulo":posteo.subtitulo,"cuerpo":posteo.cuerpo,"nombreAutor":posteo.nombreAutor,"apellidoAutor":posteo.apellidoAutor,"fechaCreacion": posteo.fechaCreacion, "imagen":posteo.imagen}
+
+    return render(request, "blogApp/perfilado.html", {"posteoPerfilado": dicc_posteo})
 
 
 def labios(request):
-    posteoLabios = Posteos.objects.get(id=3)
-    return render(request, "blogApp/labios.html",  {"posteoLabios":posteoLabios})
+    posteo = Posteos.objects.get(id=3)
+    dicc_posteo={"titulo":posteo.titulo,"subtitulo":posteo.subtitulo,"cuerpo":posteo.cuerpo,"nombreAutor":posteo.nombreAutor,"apellidoAutor":posteo.apellidoAutor,"fechaCreacion": posteo.fechaCreacion, "imagen":posteo.imagen}
+
+    return render(request, "blogApp/labios.html",  {"posteoLabios":dicc_posteo})
 
 
 def registerUser(request):
@@ -149,27 +154,6 @@ def crearPerfil(request):
         return render(request, "blogApp/crearPerfil.html",{"form":form})
 
 
-@login_required
-def crearPosteo(request):
-    if request.method=="POST":
-        form= crearPosteoForm(request.POST, request.FILES)
-        if form.is_valid():
-            info=form.cleaned_data
-            titulo=info["titulo"]
-            subtitulo=info["subtitulo"]
-            cuerpo=info["cuerpo"]
-            nombreAutor=info["nombreAutor"]
-            apellidoAutor=info["apellidoAutor"]
-            fechaCreacion=info["fechaCreacion"]
-            imagen=info["imagen"]
-            posteo= Posteos(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,nombreAutor=nombreAutor,apellidoAutor=apellidoAutor,fechaCreacion=fechaCreacion, imagen=imagen)
-            posteo.save()
-            return render(request, "blogApp/index.html", {"mensaje":"Posteo creado exitosamente"})
-        else:
-                return render(request, "blogApp/crearPosteo.html", {"form":form, "mensaje": "No se pudo crear el posteo"})
-    else:
-        form= crearPosteoForm()
-        return render(request, "blogApp/crearPosteo.html", {"form":form})
 
 @login_required
 def agregarAvatar(request):
@@ -193,3 +177,68 @@ def agregarAvatar(request):
     else:
         miFormulario=avatarForm()
         return render(request, "blogApp/agregarAvatar.html", {"form":miFormulario})
+
+
+@login_required
+def crearPosteo(request):
+    if request.method=="POST":
+        form= crearPosteoForm(request.POST, request.FILES)
+        if form.is_valid():
+            info=form.cleaned_data
+            titulo=info["titulo"]
+            subtitulo=info["subtitulo"]
+            cuerpo=info["cuerpo"]
+            nombreAutor=info["nombreAutor"]
+            apellidoAutor=info["apellidoAutor"]
+            fechaCreacion=info["fechaCreacion"]
+            imagen=info["imagen"]
+            posteo= Posteos(titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,nombreAutor=nombreAutor,apellidoAutor=apellidoAutor,fechaCreacion=fechaCreacion, imagen=imagen)
+            posteo.save()
+            return render(request, "blogApp/index.html", {"mensaje":"Posteo creado exitosamente"})
+        else:
+                return render(request, "blogApp/crearPosteo.html", {"form":form, "mensaje": "No se pudo crear el posteo"})
+    else:
+        form= crearPosteoForm()
+        return render(request, "blogApp/crearPosteo.html", {"form":form})
+
+@login_required
+def listaEditarPosteo(request):
+    posteos = Posteos.objects.all()
+    return render(request, "blogApp/listaEditarPosteo.html", {"posteos":posteos})
+
+
+
+
+@login_required
+def editarPosteo(request, id):
+    posteo= Posteos.objects.get(id=id)
+    
+
+    if request.method=="POST":
+        form= crearPosteoForm(request.POST, request.FILES)
+        if form.is_valid():
+            info=form.cleaned_data
+            posteo.id = id    
+            posteo.titulo=info["titulo"]
+            posteo.subtitulo=info["subtitulo"]
+            posteo.cuerpo=info["cuerpo"]
+            posteo.nombreAutor=info["nombreAutor"]
+            posteo.apellidoAutor=info["apellidoAutor"]
+            posteo.fechaCreacion=info["fechaCreacion"]
+            posteo.imagen=info["imagen"]
+            posteo.save()
+            return render(request, "blogApp/index.html", {"mensaje":"Posteo modificado exitosamente"})
+        else:
+            return render(request, "blogApp/EditarPosteo.html", {"form":form, "mensaje": "No se pudo editar el posteo"})
+    else:
+        form= crearPosteoForm(initial={"titulo":posteo.titulo,"subtitulo":posteo.subtitulo,"cuerpo":posteo.cuerpo,"nombreAutor":posteo.nombreAutor,"apellidoAutor":posteo.apellidoAutor,"fechaCreacion": posteo.fechaCreacion, "imagen":posteo.imagen})
+        return render(request, "blogApp/EditarPosteo.html", {"form":form,"posteo":posteo})
+
+
+def eliminarPosteo(request, id): 
+    posteo=Posteos.objects.get(id=id)
+    posteo.delete()
+    return render(request, "blogApp/index.html", {"mensaje":"Posteo eliminado correctamente"})
+
+
+

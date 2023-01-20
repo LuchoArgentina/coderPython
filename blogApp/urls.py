@@ -19,6 +19,8 @@ urlpatterns = [
     path("crearPerfil/",crearPerfil,name="crearPerfil"),
     path("agregarAvatar/",agregarAvatar,name="agregarAvatar"),
     path("crearPosteo/",crearPosteo,name="crearPosteo"),
-    
+    path("listaEditarPosteo/",listaEditarPosteo,name="listaEditarPosteo"),
+    path("editarPosteo/<id>",editarPosteo,name="editarPosteo"),  
+    path("eliminarPosteo/<id>",eliminarPosteo,name="eliminarPosteo"),   
 
 ]

@@ -1,0 +1,59 @@
+{% extends "blogApp/base.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+<!-- <h1>TU BLOG </h1> -->
+{% endblock %}
+
+{% block subtitulo %}
+<!-- <span class="subheading">sobre belleza facial</span> -->
+{% endblock %}
+
+
+{% block contenido%}
+{{mensaje}}
+
+<h3 class="subheading">CANAL DE COMUNICACION </H3>
+
+<!-- Divider-->
+<hr class="my-4" />
+
+<span class="subheading">ENVIO DE MENSAJES </span>
+
+
+<a button type="button" class="btn btn-light" href="{% url 'agregarAvatar' %}">Enviar mensaje</button></a>
+
+<!-- Divider-->
+<hr class="my-4" />
+
+<span class="subheading">MENSAJES RECIBIDOS</span>
+
+<!-- Tabla BD-->
+
+<table class="table table-bordered" >
+    <thead>
+        <th scope="col">Fecha</th>
+        <th scope="col">Remitente</th>
+        <th scope="col">Mensaje</th>
+        <th scope="col">Leido</th>
+        <th scope="col">Leer</th>
+
+        
+    </thead>
+    <tbody>
+        {% for mensaje in mensajes %}
+            <tr>
+                <td>{{mensaje.fecha}}</td>
+                <td>{{mensaje.emisor}}</td>
+                <td>{{mensaje.cuerpo}}</td>
+                <td>{{mensaje.leido}}</td>
+                <td><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Leer</a></td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock%}
