@@ -23,7 +23,7 @@
 <span class="subheading">ENVIO DE MENSAJES </span>
 
 
-<a button type="button" class="btn btn-light" href="{% url 'agregarAvatar' %}">Enviar mensaje</button></a>
+<a button type="button" class="btn btn-light" href="{% url 'enviarMensaje' %}">Enviar mensaje</button></a>
 
 <!-- Divider-->
 <hr class="my-4" />
@@ -38,7 +38,7 @@
         <th scope="col">Remitente</th>
         <th scope="col">Mensaje</th>
         <th scope="col">Leido</th>
-        <th scope="col">Leer</th>
+        
 
         
     </thead>
@@ -48,8 +48,7 @@
                 <td>{{mensaje.fecha}}</td>
                 <td>{{mensaje.emisor}}</td>
                 <td>{{mensaje.cuerpo}}</td>
-                <td>{{mensaje.leido}}</td>
-                <td><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Leer</a></td>
+                <td> Leido </td>
                 
             </tr>
         {% endfor %}
