@@ -30,7 +30,7 @@ def enviarMensaje(request):
             mensaje.save()
             return render(request, "blogApp/index.html", {"mensaje":"Mensaje enviado exitosamente"})
         else:
-                return render(request, "blogApp/enviarMensaje.html", {"form":form, "mensaje": "No se pudo crear el posteo"})
+                return render(request, "mensajesApp/enviarMensaje.html", {"form":form, "mensaje": "No se pudo enviar el mensaje"})
     else:
         form= crearMensajeForm()
         return render(request, "mensajesApp/enviarMensaje.html", {"form":form})

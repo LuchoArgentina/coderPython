@@ -27,7 +27,7 @@
 <hr class="my-4" />
 
 
-<h2> Editando Posteo: {{ posteo.titulo }}  -{{ posteo.id }}</h2> 
+<h2> Editando Posteo: {{ posteo.titulo }}  </h2> 
 
 
 <form action="{% url 'editarPosteo' posteo.id %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}

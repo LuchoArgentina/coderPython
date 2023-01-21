@@ -211,14 +211,14 @@ def listaEditarPosteo(request):
 
 @login_required
 def editarPosteo(request, id):
-    posteo= Posteos.objects.get(id=id)
+    posteo= Posteos.objects.get(id=id) 
+   
     
 
     if request.method=="POST":
         form= crearPosteoForm(request.POST, request.FILES)
         if form.is_valid():
             info=form.cleaned_data
-            posteo.id = id    
             posteo.titulo=info["titulo"]
             posteo.subtitulo=info["subtitulo"]
             posteo.cuerpo=info["cuerpo"]
@@ -227,9 +227,18 @@ def editarPosteo(request, id):
             posteo.fechaCreacion=info["fechaCreacion"]
             posteo.imagen=info["imagen"]
             posteo.save()
+            
             return render(request, "blogApp/index.html", {"mensaje":"Posteo modificado exitosamente"})
         else:
-            return render(request, "blogApp/EditarPosteo.html", {"form":form, "mensaje": "No se pudo editar el posteo"})
+            info=form.cleaned_data
+            posteo.titulo=info["titulo"]
+            posteo.subtitulo=info["subtitulo"]
+            posteo.cuerpo=info["cuerpo"]
+            posteo.nombreAutor=info["nombreAutor"]
+            posteo.apellidoAutor=info["apellidoAutor"]
+            posteo.fechaCreacion=info["fechaCreacion"]
+            posteo.save()
+            return render(request, "blogApp/index.html", {"form":form, "mensaje": "Posteo modificado exitosamente"})
     else:
         form= crearPosteoForm(initial={"titulo":posteo.titulo,"subtitulo":posteo.subtitulo,"cuerpo":posteo.cuerpo,"nombreAutor":posteo.nombreAutor,"apellidoAutor":posteo.apellidoAutor,"fechaCreacion": posteo.fechaCreacion, "imagen":posteo.imagen})
         return render(request, "blogApp/EditarPosteo.html", {"form":form,"posteo":posteo})
